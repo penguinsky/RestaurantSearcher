@@ -12,15 +12,5 @@ export default {
   components: {
     Map,
   },
-  data() {
-    return {
-      coords: null,
-    }
-  },
-  watch: {
-    coords(newCoords) {
-      console.log('Home=', newCoords)
-    },
-  },
 }
 </script>

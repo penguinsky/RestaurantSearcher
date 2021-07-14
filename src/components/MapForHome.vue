@@ -7,6 +7,11 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import 'leaflet-easybutton/src/easy-button.js'
 import 'leaflet-easybutton/src/easy-button.css'
+import 'leaflet-toolbar/dist/leaflet.toolbar.js'
+import 'leaflet-toolbar/dist/leaflet.toolbar.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas)
 
 delete L.Icon.Default.prototype._getIconUrl
 
@@ -21,6 +26,7 @@ export default {
     return {
       map: null,
       locationMarker: null,
+      latlng: null,
     }
   },
   mounted() {
@@ -41,10 +47,15 @@ export default {
       this.setLocation(latlng, zoom)
 
       //地図画像設定
-      this.map.addLayer(L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'))
+      this.map.addLayer(
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution:
+            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ',
+        })
+      )
 
       //現在地ボタン配置
-      L.easyButton('GPS', () => {
+      L.easyButton('<h>GPS</h>', () => {
         this.setLocationAuto()
       }).addTo(this.map)
 
@@ -52,6 +63,11 @@ export default {
       this.map.on('click', (e) => {
         this.setLocation(e.latlng)
       })
+
+      //検索ボタン配置
+      L.easyButton('<h>🔍</h>', () => {
+        this.gotoSearch()
+      }).addTo(this.map)
     },
     setLocation(latlng, zoom = 15) {
       if (this.locationMarker == null) {
@@ -61,6 +77,7 @@ export default {
         this.locationMarker.setLatLng(latlng)
       }
       this.map.setView(latlng, zoom)
+      this.latlng = latlng
     },
     setLocationAuto() {
       navigator.geolocation.getCurrentPosition(
@@ -74,6 +91,14 @@ export default {
         { enableHighAccuracy: true }
       )
     },
+    gotoSearch() {
+      this.map.remove()
+      console.log(this.latlng)
+      this.$router.push({
+        name: 'Search',
+        params: { lat: this.latlng.lat, lng: this.latlng.lng },
+      })
+    },
   },
 }
 </script>
@@ -82,8 +107,7 @@ export default {
 html,
 body,
 #app {
-  height: 500px;
-  width: 500px;
+  height: 100%;
 }
 body {
   margin: 0;

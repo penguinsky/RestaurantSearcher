@@ -34,24 +34,11 @@ export default {
       map: L.map('app', { center: L.latLng(this.lat, this.lng), zoom: 15 }),
     }
   },
-  //watch: { //何度もマーカーが重なってしまう
-  //  lat() {
-  //    this.updateMap()
-  //  },
-  //  lng() {
-  //    this.updateMap()
-  //  },
-  //  shops() {
-  //    this.updateMap()
-  //  },
-  //},
   created() {
-    console.log('hello:', this.lat, this.lng, this.shops)
     this.updateMap()
   },
   methods: {
     updateMap() {
-      console.log('Map=', this.lat, this.lng)
       this.map.addLayer(L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'))
       this.map.addLayer(L.marker([this.lat, this.lng]))
       for (let shop of this.shops) {

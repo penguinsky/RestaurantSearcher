@@ -31,11 +31,11 @@ export default {
   },
   data() {
     return {
-      map: L.map('map2', { center: L.latLng(this.lat, this.lng), zoom: 15 }),
+      map: null,
     }
   },
-  created() {
-    console.log(this.lat, this.lng, this.shops)
+  mounted() {
+    this.map = L.map('map2', { center: L.latLng(this.lat, this.lng), zoom: 15 })
     this.updateMap()
   },
   methods: {
@@ -50,13 +50,4 @@ export default {
 }
 </script>
 
-<style>
-html,
-body,
-#map2 {
-  height: 100%;
-}
-body {
-  margin: 0;
-}
-</style>
+<style></style>

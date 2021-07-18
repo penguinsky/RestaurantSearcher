@@ -1,17 +1,21 @@
 <template>
-  <div>
-    <Map v-if="loaded" :lat="lat" :lng="lng" :shops="shops"></Map>
-    <div v-for="shop in shops" :key="shop.id">{{ shop.name }}<br /></div>
+  <div class="main">
+    <div class="shops">
+      <ShopList :shops="shops"></ShopList>
+    </div>
+    <Map v-if="loaded" class="map" :lat="lat" :lng="lng" :shops="shops"></Map>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ShopList from '../components/ShopList.vue'
 import Map from '../components/Map.vue'
 
 export default {
   name: 'Search',
   components: {
+    ShopList,
     Map,
   },
   data() {
@@ -22,25 +26,18 @@ export default {
   },
   computed: {
     lat() {
-      return Number(this.$route.params.lat)
+      return Number(this.$route.query.lat)
     },
     lng() {
-      return Number(this.$route.params.lng)
-    },
-  },
-  watch: {
-    shops(newShops) {
-      console.log('newShops=', newShops)
+      return Number(this.$route.query.lng)
     },
   },
   created() {
     this.searchShops()
-    console.log('Search=', this.shops)
   },
   methods: {
     searchShops() {
-      ////ぐるなびAPIで店リスト取得
-      let queryOptions = {
+      const queryOptions = {
         params: {
           lat: this.lat,
           lng: this.lng,
@@ -51,10 +48,25 @@ export default {
       }
       axios.get('/api/hotpepper/gourmet/v1/', queryOptions).then((result) => {
         this.shops = result.data.results.shop
-        console.log(result.data.results.shop)
         this.loaded = true
       })
     },
   },
 }
 </script>
+
+<style>
+.main {
+  height: 100%;
+  width: 100%;
+}
+.shops {
+  display: inline-block;
+  vertical-align: top;
+}
+.map {
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+}
+</style>

@@ -94,7 +94,7 @@ export default {
     gotoSearch() {
       this.$router.push({
         name: 'Search',
-        params: { lat: this.latlng.lat, lng: this.latlng.lng },
+        query: { lat: this.latlng.lat, lng: this.latlng.lng },
       })
     },
   },

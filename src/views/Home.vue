@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="main">
     <Map></Map>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.main {
   height: 100%;
   width: 100%;
 }

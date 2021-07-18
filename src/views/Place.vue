@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     Place
     <button @click="pushed">PushMe</button>
     <router-link to="/access">Access</router-link>
@@ -19,4 +19,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.main {
+  height: 100%;
+  width: 100%;
+}
+</style>

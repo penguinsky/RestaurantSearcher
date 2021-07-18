@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     Access
     {{ $route.params.id }}
   </div>
@@ -9,4 +9,9 @@
 export default {}
 </script>
 
-<style></style>
+<style scoped>
+.main {
+  height: 100%;
+  width: 100%;
+}
+</style>

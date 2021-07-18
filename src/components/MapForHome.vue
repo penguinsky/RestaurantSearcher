@@ -1,5 +1,5 @@
 <template>
-  <div id="app"></div>
+  <div id="map"></div>
 </template>
 
 <script>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     initMap(latlng, zoom) {
-      this.map ??= L.map('app', { center: latlng, zoom: zoom })
+      this.map ??= L.map('map', { center: latlng, zoom: zoom })
       this.setLocation(latlng, zoom)
 
       //地図画像設定
@@ -92,8 +92,6 @@ export default {
       )
     },
     gotoSearch() {
-      this.map.remove()
-      console.log(this.latlng)
       this.$router.push({
         name: 'Search',
         params: { lat: this.latlng.lat, lng: this.latlng.lng },
@@ -106,7 +104,7 @@ export default {
 <style>
 html,
 body,
-#app {
+#map {
   height: 100%;
 }
 body {

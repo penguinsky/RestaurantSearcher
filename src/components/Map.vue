@@ -1,5 +1,5 @@
 <template>
-  <div id="app"></div>
+  <div id="map2"></div>
 </template>
 
 <script>
@@ -31,10 +31,11 @@ export default {
   },
   data() {
     return {
-      map: L.map('app', { center: L.latLng(this.lat, this.lng), zoom: 15 }),
+      map: L.map('map2', { center: L.latLng(this.lat, this.lng), zoom: 15 }),
     }
   },
   created() {
+    console.log(this.lat, this.lng, this.shops)
     this.updateMap()
   },
   methods: {
@@ -52,7 +53,7 @@ export default {
 <style>
 html,
 body,
-#app {
+#map2 {
   height: 100%;
 }
 body {

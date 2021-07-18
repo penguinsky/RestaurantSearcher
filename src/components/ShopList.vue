@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <shop v-for="shop in shops" :key="shop.id" :shop="shop"> </shop>
+    <shop v-for="shop in shops" :key="shop.id" :shop="shop" @select="send(shop.id)"> </shop>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
   },
   props: {
     shops: Array,
+  },
+  methods: {
+    send(id) {
+      this.$emit('select', id)
+    },
   },
 }
 </script>

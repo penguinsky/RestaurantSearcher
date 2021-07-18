@@ -63,6 +63,7 @@ export default {
 .shops {
   display: inline-block;
   vertical-align: top;
+  width: 50%;
 }
 .map {
   height: 100%;

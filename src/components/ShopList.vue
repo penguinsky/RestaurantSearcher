@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <shop v-for="shop in shops" :key="shop.id" :shop="shop" @select="send(shop.id)"> </shop>
+    <shop v-for="shop in shops" :key="shop.id" :shop="shop" @select="send(shop.id)" />
   </div>
 </template>
 

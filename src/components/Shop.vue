@@ -21,9 +21,6 @@ export default {
   props: {
     shop: null,
   },
-  mounted() {
-    console.log(this.shop)
-  },
   methods: {
     send() {
       this.$emit('select')
